@@ -5,7 +5,7 @@ import socket
 #    Constants    #
 ###################
 
-PORT = 9999
+PORT = 7777
 TIMEOUT = 5
 EXIT_CODES = {
     'Wrong args':       111,

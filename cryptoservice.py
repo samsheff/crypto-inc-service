@@ -81,7 +81,7 @@ class Cryptoservice(SocketServer.BaseRequestHandler):
 # Main Function if we're not being required
 if __name__ == "__main__":
 
-    HOST, PORT = "0.0.0.0", 9999
+    HOST, PORT = "0.0.0.0", 7777
 
     # Create the server, binding to localhost on port 9999
     server = SocketServer.TCPServer((HOST, PORT), Cryptoservice)
