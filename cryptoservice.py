@@ -10,7 +10,7 @@ class Cryptoservice(SocketServer.BaseRequestHandler):
     # Handle a new connection
     def handle(self):
             # Connect to the database
-            db = DB()
+            db = DB(dbname='crypto', user='docker', passwd='docker')
             
             # Print Welcome Message
             self.request.send("Welcome to Crypto Inc.'s Cryptographic Service.\nCommands:\n put [data] [key]\n get [id] [key]\n>>> ")
