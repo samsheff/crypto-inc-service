@@ -19,8 +19,6 @@ RUN apt-get update && apt-get install -y python-software-properties software-pro
 
 RUN pip install PyGreSQL
 
-RUN cd / && wget https://gist.githubusercontent.com/samsheff/7aba10dba2cc38d97f4b707ea9b277e0/raw/cff62b168b0a1f53e520153b5a2920697d1f167b/server.py
-
 # Note: The official Debian and Ubuntu images automatically ``apt-get clean``
 # after each ``apt-get``
 
@@ -52,6 +50,7 @@ EXPOSE 7777
 VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
 
 COPY start_docker.sh /
+COPY cryptoservice.py /server.py
 
 # Set the default command to run when starting the container
 CMD ["/bin/sh", "-c", "/start_docker.sh"]
