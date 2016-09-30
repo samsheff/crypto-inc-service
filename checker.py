@@ -5,6 +5,7 @@ import socket
 #    Constants    #
 ###################
 
+PORT = 9999
 TIMEOUT = 5
 EXIT_CODES = {
     'Wrong args':       111,
@@ -20,14 +21,14 @@ EXIT_CODES = {
 ####################
 
 def usage_and_exit(exit_code):
-    print("Usage: python checker.py [command] [args]\nCommands:\n  check [hostname] [port]\n  put [hostname] [port] [data] [flag_id]\n  get [hostname] [port] [id] [key]")
+    print("Usage: python checker.py [command] [args]\nCommands:\n  check [hostname] \n  put [hostname] [data] [flag_id]\n  get [hostname] [id] [key]")
     exit(exit_code)
     
 def connect_to_service(address, host):
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(TIMEOUT)
-        s.connect((address, port))
+        s.connect((address, PORT))
 
         return s
     except socket.error:
@@ -104,29 +105,29 @@ if __name__ == "__main__":
         command = sys.argv[1]
 
         if command == "check":
-            if len(sys.argv) != 4:
+            if len(sys.argv) != 3:
                 usage_and_exit(110)
             else:
-                address, port = sys.argv[2], int(sys.argv[3])
-                check(address, port)
+                address = sys.argv[2]
+                check(address, PORT)
 
         elif (command == "put"):
-            if len(sys.argv) != 6:
+            if len(sys.argv) != 5:
                 usage_and_exit(110)
             else:
-                address, port = sys.argv[2], int(sys.argv[3])
-                put_data, flag_id = sys.argv[4], sys.argv[5]
+                address = sys.argv[2]
+                put_data, flag_id = sys.argv[3], sys.argv[4]
 
-                connection = connect_to_service(address, port)
+                connection = connect_to_service(address, PORT)
                 
                 put(connection, put_data, flag_id)
         elif (command == "get"):
-            if len(sys.argv) != 6:
+            if len(sys.argv) != 5:
                 usage_and_exit(110)
             else:
-                address, port = sys.argv[2], int(sys.argv[3])
-                db_id, key = sys.argv[4], sys.argv[5]
+                address = sys.argv[2]
+                db_id, key = sys.argv[3], sys.argv[4]
 
-                connection = connect_to_service(address, port)
+                connection = connect_to_service(address, PORT)
                 
                 get(connection, db_id, key)
